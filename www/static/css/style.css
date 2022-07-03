@@ -1,0 +1,30 @@
+@import url("https://unpkg.com/chota@latest");
+
+body {
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.top-margin-s {
+    margin-top: 5px;
+}
+
+.top-margin-m {
+    margin-top: 10px;
+}
+
+.top-margin-l {
+    margin-top: 20px;
+}
+
+.bg-primary-light {
+    background-color: #14854F20;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+.rounded {
+    border-radius: 5px;
+}

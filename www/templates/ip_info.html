@@ -1,0 +1,22 @@
+{% extends 'site.html' %}
+
+{% block title %}Ip Information{% endblock %}
+
+{% block content %}
+    <h3>Info on IP: {{ ip_info["query"] }}</h3>
+    <pre>
+{
+    "country": "{{ ip_info["country"] }}",
+    "regionName":"{{ ip_info["regionName"] }}",
+    "city": "{{ ip_info["city"] }}",
+    "lat": {{ ip_info["lat"] }},
+    "lon": {{ ip_info["lon"] }},
+    "isp": "{{ ip_info["isp"] }}"
+    "org": "{{ ip_info["org"] }}"
+    "as": "{{ ip_info["as"] }}"
+    "mobile": {{ ip_info["mobile"] }}
+    "proxy": {{ ip_info["proxy"] }}
+    "hosting": {{ ip_info["hosting"] }}
+}
+    </pre>
+{% endblock %}

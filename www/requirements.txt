@@ -1,0 +1,8 @@
+IP2Location
+pandas
+folium
+tabulate
+Flask
+requests
+seaborn
+tqdm

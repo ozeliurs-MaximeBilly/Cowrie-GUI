@@ -1,0 +1,75 @@
+{% extends 'site.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <!-- Country Map -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Country Map</h3>
+            {{ country_map | safe }}
+        </div>
+        <!-- Top Ips -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Top IPs</h3>
+            <table style="margin: 5px; width: 98%;">
+                {% for _, ip in top_ips.iterrows() %}
+                    <tr>
+                        <td class="no-padding" style="border-bottom-style: solid">
+                            <a href="/ip/{{ ip["src_ip"] }}">{{ ip["src_ip"] }}</a>
+                        </td>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ ip["ip_count"] }} sessions</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- Top Countries -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Top Countries</h3>
+            <table style="margin: 5px; width: 98%;">
+                {% for _, country in top_country.iterrows() %}
+                    <tr>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ country["country_short"] }}</td>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ country["country_count"] }} sessions</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- Latest Sessions -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Latest Sessions</h3>
+            <table style="margin: 5px; width: 98%;">
+                {% for _, session in latest_sessions.iterrows() %}
+                    <tr>
+                        <td class="no-padding" style="border-bottom-style: solid">
+                            <a href="/session/{{ session["session"] }}">{{ session["session"] }}</a>
+                        </td>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ session["timestamp"] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <!-- -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Country Repartition</h3>
+            {{ country_graph | safe }}
+        </div>
+        <!-- -->
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Top Inputs</h3>
+            <table style="margin: 5px; width: 98%;">
+                {% for _, input in top_commands.iterrows() %}
+                    <tr>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ input["input"] }}</td>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ input["input_count"] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Time Repartition</h3>
+            {{ time_rep | safe }}
+        </div>
+        <div class="col-6 bg-primary-light"> .col </div>
+    </div>
+{% endblock %}

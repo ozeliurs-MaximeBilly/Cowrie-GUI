@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>{% block title %}{% endblock %} - Cowrie GUI</title>
+</head>
+<body style="background-image: url('{{ url_for('static', filename='bg.jpg') }}');">
+    <!--  -->
+    <nav class="nav" style="background-color: white">
+        <div class="nav-left">
+            <a class="brand" href="/">Cowrie-GUI</a>
+            <div class="tabs">
+                <a>Link 1</a>
+                <a class="active">Link 2</a>
+            </div>
+        </div>
+        <div class="nav-right">
+            <a class="button outline" href="/refresh/all">Load Everything</a>
+            <a class="button outline" href="/refresh">Load Last Day</a>
+        </div>
+    </nav>
+    <div class="container top-margin-m">
+    {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

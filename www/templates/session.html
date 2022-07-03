@@ -1,0 +1,29 @@
+{% extends "site.html" %}
+
+{% block title %}Session Info{% endblock %}
+
+{% block content %}
+    <ul>
+    {% for _, line in session_info.iterrows() %}
+        {% if line["eventid"] == "cowrie.session.connect" %}
+            <li>Client connected to Cowrie Honeypot from {{ line["src_ip"] }}.</li>
+        {% elif line["eventid"] == "cowrie.client.version" %}
+            <li>SSH client version is {{ line["version"] }}.</li>
+        {% elif line["eventid"] == "cowrie.client.kex" %}
+            <li>SSH client hassh fingerprint is {{ line["hassh"] }}.</li>
+        {% elif line["eventid"] == "cowrie.login.success" %}
+            <li>Client logged in with user: <code>{{ line["username"] }}</code> and password: <code>{{ line["password"] }}</code> with success.</li>
+        {% elif line["eventid"] == "cowrie.session.params" %}
+            <li>Client host architecture is {{ line["arch"] }}.</li>
+        {% elif line["eventid"] == "cowrie.command.input" %}
+            <li>Client ran command: <code>{{ line["input"] | safe }}</code>.</li>
+        {% elif line["eventid"] == "cowrie.log.closed" %}
+            <li>Closing tty log (session duration {{ line["duration"] }}).</li>
+        {% elif line["eventid"] == "cowrie.session.closed" %}
+            <li>Connection lost.</li>
+        {% else %}
+            <li>{{ line["eventid"] }}</li>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% endblock %}
