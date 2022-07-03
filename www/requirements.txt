@@ -6,3 +6,4 @@ Flask
 requests
 seaborn
 tqdm
+gunicorn
