@@ -80,3 +80,7 @@ def test():
 
     print("done")
     return redirect("/")
+
+@app.route("/health")
+def health():
+    return "OK"
