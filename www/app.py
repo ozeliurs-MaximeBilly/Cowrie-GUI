@@ -35,7 +35,7 @@ def home():  # put application's code here
                            latest_sessions=get_latest_sessions(dataset)[:10],
                            country_graph=make_pie_chart("Sessions by country", cc["country_short"][:15].tolist(), cc["country_count"][:15].tolist()),
                            top_commands=get_top_commands(dataset)[:15],
-                           bot_commands=get_top_commands(dataset)[15:],
+                           bot_commands=get_top_commands(dataset)[-15:],
                            time_rep=make_bar_chart("Time Repartition", dr["timestamp"].tolist(), dr["day_count"].tolist()))
 
 
