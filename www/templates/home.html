@@ -71,5 +71,16 @@
             {{ time_rep | safe }}
         </div>
         <div class="col-6 bg-primary-light"> .col </div>
+        <div class="col-6 bg-primary-light">
+            <h3 style="margin-left: 10px">Least Common Inputs</h3>
+            <table style="margin: 5px; width: 98%;">
+                {% for _, input in bot_commands.iterrows() %}
+                    <tr>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ input["input"] }}</td>
+                        <td class="no-padding" style="border-bottom-style: solid">{{ input["input_count"] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}
