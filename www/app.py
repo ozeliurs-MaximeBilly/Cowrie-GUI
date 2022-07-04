@@ -12,8 +12,12 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
 try:
-    dataset = read_cowrie_file("./logs/cowrie.json")
-    dataset = prepare_dataset(dataset)
+    dataset = pd.DataFrame()
+    for file in Path("./logs").iterdir():
+        if file.name == ".DS_Store":
+            continue
+        l_dataset = read_cowrie_file(str(file))
+        dataset = dataset.append(prepare_dataset(l_dataset))
 except FileNotFoundError:
     dataset = pd.DataFrame()
 
@@ -52,19 +56,6 @@ def refresh():
     global dataset
     l_dataset = read_cowrie_file("./logs/cowrie.json")
     dataset = prepare_dataset(l_dataset)
-
-    return redirect("/")
-
-
-@app.route("/refresh/all")
-def refresh_all():
-    global dataset
-    dataset = pd.DataFrame()
-    for file in Path("./logs").iterdir():
-        if file.name == ".DS_Store":
-            continue
-        l_dataset = read_cowrie_file(str(file))
-        dataset = dataset.append(prepare_dataset(l_dataset))
 
     return redirect("/")
 
