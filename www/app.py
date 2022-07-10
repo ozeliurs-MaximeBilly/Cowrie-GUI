@@ -12,7 +12,7 @@ warnings.filterwarnings("ignore")
 app = Flask(__name__)
 
 
-dataset = pd.DataFrame()
+dataset = load_all()
 
 
 @app.route("/")
