@@ -30,7 +30,7 @@ def read_cowrie_file(filename: str):
 
 
 def load_all(threads: int = 6):
-    files = [x for x in Path("./logs").iterdir() if x.name == ".DS_Store"]
+    files = [x for x in Path("./logs").iterdir() if x.name != ".DS_Store"]
     return pd.concat(mp.Pool(threads).map(thread_job, np.array_split(files, threads)), ignore_index=True)
 
 
@@ -54,8 +54,7 @@ def ip_complete(input_df: pd.Series) -> pd.Series:
 
 
 def prepare_dataset(input_df: pd.DataFrame) -> pd.DataFrame:
-    tqdm.pandas(desc="IP Complete")
-    input_df = input_df.progress_apply(ip_complete, axis=1)
+    input_df = input_df.apply(ip_complete, axis=1)
 
     return input_df
 
