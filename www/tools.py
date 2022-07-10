@@ -30,14 +30,13 @@ def read_cowrie_file(filename: str):
 
 
 def load_all(threads: int = 6):
-    def thread_job(file):
-        local_df = read_cowrie_file(str(file))
-        return prepare_dataset(local_df)
-
     files = [x for x in Path("./logs").iterdir() if x.name == ".DS_Store"]
     return pd.concat(mp.Pool(threads).map(thread_job, np.array_split(files, threads)), ignore_index=True)
 
 
+def thread_job(file):
+    local_df = read_cowrie_file(str(file))
+    return prepare_dataset(local_df)
 
 
 def ip_complete(input_df: pd.Series) -> pd.Series:
