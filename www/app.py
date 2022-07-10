@@ -60,6 +60,18 @@ def refresh():
 
     return redirect("/")
 
+@app.route("/refresh/all")
+def refresh_all():
+    try:
+        dataset = pd.DataFrame()
+        for file in Path("./logs").iterdir():
+            if file.name == ".DS_Store":
+                continue
+            l_dataset = read_cowrie_file(str(file))
+            dataset = dataset.append(prepare_dataset(l_dataset))
+    except FileNotFoundError:
+        dataset = pd.DataFrame()
+
 
 @app.route("/test")
 def test():
