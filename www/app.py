@@ -55,7 +55,10 @@ def refresh():
 
 @app.route("/refresh/all")
 def refresh_all():
-    load_all()
+    global dataset
+    dataset = load_all()
+    return redirect("/")
+
 
 
 @app.route("/test")
