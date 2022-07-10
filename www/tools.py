@@ -34,8 +34,10 @@ def load_all(threads: int = 6):
     return pd.concat(mp.Pool(threads).map(thread_job, np.array_split(files, threads)), ignore_index=True)
 
 
-def thread_job(file):
-    local_df = read_cowrie_file(str(file))
+def thread_job(file_list):
+    local_df = pd.DataFrame()
+    for file in file_list:
+        local_df = local_df.append(read_cowrie_file(str(file)))
     return prepare_dataset(local_df)
 
 
